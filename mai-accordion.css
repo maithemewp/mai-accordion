@@ -55,9 +55,5 @@
 }
 
 .mai-accordion-content {
-	/* background: #fff; */
-	/* padding: 4%; */
 	padding: var(--spacing-md);
-	/* margin-top: -32px; */
-	/* border: 1px solid #ebebeb; */
 }
