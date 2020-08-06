@@ -213,5 +213,5 @@ function mai_do_accordion_item_block() {
 }
 
 function mai_accordion_enqueue_assets() {
-	wp_enqueue_style( 'mai-accordion', plugin_dir_url( __FILE__ ) . '/mai-accordion.css', [], '0.1.1' );
+	wp_enqueue_style( 'mai-accordion', plugin_dir_url( __FILE__ ) . 'mai-accordion.css', [], '0.1.1' );
 }
