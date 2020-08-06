@@ -4,7 +4,7 @@
  * Plugin Name:     Mai Accordion
  * Plugin URI:      https://website.com
  * Description:     Core funtionality for website.com
- * Version:         0.1.0
+ * Version:         0.1.1
  *
  * Author:          BizBudding, Mike Hemberger
  * Author URI:      https://bizbudding.com
@@ -213,5 +213,5 @@ function mai_do_accordion_item_block() {
 }
 
 function mai_accordion_enqueue_assets() {
-	wp_enqueue_style( 'mai-accordion', plugin_dir_url( __FILE__ ) . '/mai-accordion.css', [], '0.1.0' );
+	wp_enqueue_style( 'mai-accordion', plugin_dir_url( __FILE__ ) . '/mai-accordion.css', [], '0.1.1' );
 }
