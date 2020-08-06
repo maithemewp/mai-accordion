@@ -24,9 +24,8 @@
 	box-shadow: var(--shadow);
 }
 
- /* Hide border. */
 .mai-accordion[style*="--row-gap:0"] .mai-accordion-item + .mai-accordion-item {
-	margin-top: -1px;
+	border-top: 0;
 }
 
 .mai-accordion-item:last-child {
@@ -45,10 +44,6 @@
 .mai-accordion-summary:hover,
 .mai-accordion-summary:focus {
 	cursor: pointer;
-}
-
-.mai-accordion-item[open] .mai-accordion-summary {
-	border-bottom: var(--border, 1px solid #e9e9e9);
 }
 
 .mai-accordion-item[open] .mai-accordion-summary ~ * {
