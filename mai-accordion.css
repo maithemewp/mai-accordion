@@ -1,0 +1,63 @@
+.mai-accordion-item {
+	background-color: var(--color-white);
+	margin: 0;
+	padding: 0;
+	border: var(--border);
+}
+
+.mai-accordion-item + .mai-accordion-item {
+	border-top: 0;
+}
+
+.mai-accordion-item:last-child {
+	margin-bottom: var(--spacing-md);
+}
+
+.mai-accordion-summary {
+	margin: 0;
+	padding: var(--spacing-xs) var(--spacing-md);
+	font-family: var(--heading-font-family);
+	font-size: 1rem;
+	font-weight: var(--heading-font-weight);
+	letter-spacing: var(--heading-letter-spacing);
+}
+
+.mai-accordion-summary:hover,
+.mai-accordion-summary:focus {
+	cursor: pointer;
+}
+
+.mai-accordion-item[open] .mai-accordion-summary {
+	border-bottom: var(--border);
+}
+
+.mai-accordion-item[open] .mai-accordion-summary ~ * {
+	-webkit-animation: maiAccordion .5s ease-in-out;
+	animation: maiAccordion .5s ease-in-out;
+}
+
+@-webkit-keyframes maiAccordion {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+@keyframes maiAccordion {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+.mai-accordion-content {
+	/* background: #fff; */
+	/* padding: 4%; */
+	padding: var(--spacing-md);
+	/* margin-top: -32px; */
+	/* border: 1px solid #ebebeb; */
+}
