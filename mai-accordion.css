@@ -14,13 +14,14 @@
 
 .mai-accordion {
 	margin-bottom: var(--spacing-md, 24px);
+	border: var(--border, 1px solid rgba(10, 20, 30, 0.5));
 }
 
 .mai-accordion-item {
 	background-color: var(--color-white, #fff);
 	margin: 0 0 var(--row-gap);
 	padding: 0;
-	border: var(--border, rgba(10, 20, 30, 0.5));
+	border: var(--border, 1px solid rgba(10, 20, 30, 0.5));
 	box-shadow: var(--shadow);
 }
 
@@ -48,7 +49,7 @@
 }
 
 .mai-accordion-item[open] .mai-accordion-summary {
-	border-bottom: var(--border, rgba(10, 20, 30, 0.5));
+	border-bottom: var(--border, 1px solid rgba(10, 20, 30, 0.5));
 }
 
 .mai-accordion-item[open] .mai-accordion-summary ~ * {
