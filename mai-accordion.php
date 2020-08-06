@@ -64,7 +64,7 @@ function mai_register_accordion_blocks() {
 	);
 }
 
-add_action( 'acf/init', 'mai_register_accordion_item_field_group' );
+add_action( 'acf/init', 'mai_register_accordion_field_groups' );
 /**
  * Register Mai Columns block field group.
  *
@@ -72,10 +72,44 @@ add_action( 'acf/init', 'mai_register_accordion_item_field_group' );
  *
  * @return void
  */
-function mai_register_accordion_item_field_group() {
+function mai_register_accordion_field_groups() {
 	if ( ! function_exists( 'acf_add_local_field_group' ) ) {
 		return;
 	}
+
+	acf_add_local_field_group(
+		[
+			'key'    => 'mai_accordion',
+			'title'  => __( 'Mai Accordion', 'mai-engine' ),
+			'fields' => [
+				[
+					'key'           => 'mai_accordion',
+					'label'         => __( 'Bottom Spacing', 'mai-engine' ),
+					'name'          => 'row_gap',
+					'type'          => 'button_group',
+					'default_value' => 'md',
+					'choices'       => [
+						''   => __( 'None', 'mai-engine' ),
+						'xs' => __( 'XS', 'mai-engine' ),
+						'sm' => __( 'SM', 'mai-engine' ),
+						'md' => __( 'MD', 'mai-engine' ),
+						'lg' => __( 'LG', 'mai-engine' ),
+						'xl' => __( 'XL', 'mai-engine' ),
+					],
+				],
+			],
+			'location' => [
+				[
+					[
+						'param'    => 'block',
+						'operator' => '==',
+						'value'    => 'acf/mai-accordion',
+					],
+				],
+			],
+			'active' => true,
+		],
+	);
 
 	acf_add_local_field_group(
 		[
@@ -99,7 +133,7 @@ function mai_register_accordion_item_field_group() {
 				],
 			],
 			'active'  => true,
-		]
+		],
 	);
 }
 
@@ -122,11 +156,17 @@ function mai_do_accordion_block( $block, $content = '', $is_preview = false, $po
 	];
 	$attributes = [
 		'class' => 'mai-accordion',
+		'style' => '',
 	];
 
 	if ( isset( $block['className'] ) && $block['className'] ) {
 		$attributes['class'] = mai_add_classes( $block['className'], $attributes['class'] );
 	}
+
+	$row_gap = get_field( 'row_gap' );
+	$row_gap = $row_gap ? sprintf( 'var(--spacing-%s)', esc_html( $row_gap ) ) : 0;
+
+	$attributes['style'] .= sprintf( '--row-gap:%s;', $row_gap );
 
 	// if ( isset( $block['align'] ) && $block['align'] ) {
 	// 	$attributes['class'] .= ' align' . $block['align'];
