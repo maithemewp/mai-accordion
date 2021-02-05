@@ -2,216 +2,214 @@
 
 /**
  * Plugin Name:     Mai Accordion
- * Plugin URI:      https://website.com
- * Description:     Core funtionality for website.com
+ * Plugin URI:      https://bizbudding.com/products/mai-accordion/
+ * Description:     Custom block for adding JS-free accordions to your content.
  * Version:         0.1.1
  *
- * Author:          BizBudding, Mike Hemberger
+ * Author:          BizBudding
  * Author URI:      https://bizbudding.com
  */
 
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-add_action( 'acf/init', 'mai_register_accordion_blocks' );
 /**
- * Register the accordion blocks
+ * Main Mai_Accordion_Plugin Class.
  *
- * @since TBD
- *
- * @return void
+ * @since 0.1.0
  */
-function mai_register_accordion_blocks() {
-	if ( ! function_exists( 'acf_register_block_type' ) ) {
-		return;
+final class Mai_Accordion_Plugin {
+
+	/**
+	 * @var   Mai_Accordion_Plugin The one true Mai_Accordion
+	 * @since 0.1.0
+	 */
+	private static $instance;
+
+	/**
+	 * Main Mai_Accordion_Plugin Instance.
+	 *
+	 * Insures that only one instance of Mai_Accordion_Plugin exists in memory at any one
+	 * time. Also prevents needing to define globals all over the place.
+	 *
+	 * @since   0.1.0
+	 * @static  var array $instance
+	 * @uses    Mai_Accordion_Plugin::setup_constants() Setup the constants needed.
+	 * @uses    Mai_Accordion_Plugin::includes() Include the required files.
+	 * @uses    Mai_Accordion_Plugin::hooks() Activate, deactivate, etc.
+	 * @see     Mai_Accordion_Plugin()
+	 * @return  object | Mai_Accordion_Plugin The one true Mai_Accordion_Plugin
+	 */
+	public static function instance() {
+		if ( ! isset( self::$instance ) ) {
+			// Setup the setup.
+			self::$instance = new Mai_Accordion_Plugin;
+			// Methods.
+			self::$instance->setup_constants();
+			self::$instance->includes();
+			self::$instance->hooks();
+		}
+		return self::$instance;
 	}
 
-	acf_register_block_type(
-		[
-			'name'            => 'mai-accordion',
-			'title'           => __( 'Mai Accordion', 'mai-engine', 'mai-engine' ),
-			'description'     => __( 'A custom accordion block.', 'mai-engine' ),
-			'render_callback' => 'mai_do_accordion_block',
-			'category'        => 'widget',
-			'keywords'        => [ 'accordion', 'faq', 'toggle' ],
-			// 'icon'            => '',
-			// 'enqueue_assets'  => '',
-			'enqueue_assets'  => 'mai_accordion_enqueue_assets',
-			'supports'        => [
-				// 'align'              => [ 'wide', 'full' ],
-				'align'              => false,
-				'mode'               => false,
-				'__experimental_jsx' => true,
-			],
-		]
-	);
+	/**
+	 * Throw error on object clone.
+	 *
+	 * The whole idea of the singleton design pattern is that there is a single
+	 * object therefore, we don't want the object to be cloned.
+	 *
+	 * @since   0.1.0
+	 * @access  protected
+	 * @return  void
+	 */
+	public function __clone() {
+		// Cloning instances of the class is forbidden.
+		_doing_it_wrong( __FUNCTION__, __( 'Cheatin&#8217; huh?', 'mai-accordion' ), '1.0' );
+	}
 
-	acf_register_block_type(
-		[
-			'name'            => 'mai-accordion-item',
-			'title'           => __( 'Mai Accordion Item', 'mai-engine', 'mai-engine' ),
-			'description'     => __( 'A custom accordion item block.', 'mai-engine' ),
-			'render_callback' => 'mai_do_accordion_item_block',
-			'category'        => 'widget',
-			// 'keywords'        => [],
-			// 'icon'            => '',
-			'supports'        => [
-				'align'              => false,
-				'mode'               => false,
-				'__experimental_jsx' => true,
-			],
-		]
-	);
+	/**
+	 * Disable unserializing of the class.
+	 *
+	 * @since   0.1.0
+	 * @access  protected
+	 * @return  void
+	 */
+	public function __wakeup() {
+		// Unserializing instances of the class is forbidden.
+		_doing_it_wrong( __FUNCTION__, __( 'Cheatin&#8217; huh?', 'mai-accordion' ), '1.0' );
+	}
+
+	/**
+	 * Setup plugin constants.
+	 *
+	 * @access  private
+	 * @since   0.1.0
+	 * @return  void
+	 */
+	private function setup_constants() {
+
+		// Plugin version.
+		if ( ! defined( 'MAI_ACCORDION_VERSION' ) ) {
+			define( 'MAI_ACCORDION_VERSION', '0.1.1' );
+		}
+
+		// Plugin Folder Path.
+		if ( ! defined( 'MAI_ACCORDION_PLUGIN_DIR' ) ) {
+			define( 'MAI_ACCORDION_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
+		}
+
+		// Plugin Classes Path.
+		if ( ! defined( 'MAI_ACCORDION_CLASSES_DIR' ) ) {
+			define( 'MAI_ACCORDION_CLASSES_DIR', MAI_ACCORDION_PLUGIN_DIR . 'classes/' );
+		}
+
+		// Plugin Includes Path.
+		if ( ! defined( 'MAI_ACCORDION_INCLUDES_DIR' ) ) {
+			define( 'MAI_ACCORDION_INCLUDES_DIR', MAI_ACCORDION_PLUGIN_DIR . 'includes/' );
+		}
+
+		// Plugin Folder URL.
+		if ( ! defined( 'MAI_ACCORDION_PLUGIN_URL' ) ) {
+			define( 'MAI_ACCORDION_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
+		}
+
+		// Plugin Root File.
+		if ( ! defined( 'MAI_ACCORDION_PLUGIN_FILE' ) ) {
+			define( 'MAI_ACCORDION_PLUGIN_FILE', __FILE__ );
+		}
+
+		// Plugin Base Name
+		if ( ! defined( 'MAI_ACCORDION_BASENAME' ) ) {
+			define( 'MAI_ACCORDION_BASENAME', dirname( plugin_basename( __FILE__ ) ) );
+		}
+	}
+
+	/**
+	 * Include required files.
+	 *
+	 * @access  private
+	 * @since   0.1.0
+	 * @return  void
+	 */
+	private function includes() {
+		// Include vendor libraries.
+		require_once __DIR__ . '/vendor/autoload.php';
+		// Classes.
+		foreach ( glob( MAI_ACCORDION_CLASSES_DIR . '*.php' ) as $file ) { include $file; }
+		// Includes.
+		foreach ( glob( MAI_ACCORDION_INCLUDES_DIR . '*.php' ) as $file ) { include $file; }
+	}
+
+	/**
+	 * Run the hooks.
+	 *
+	 * @since 0.1.0
+	 * @return void
+	 */
+	public function hooks() {
+		add_action( 'admin_init', [ $this, 'updater' ] );
+		add_action( 'plugins_loaded', [ $this, 'run' ] );
+	}
+
+	/**
+	 * Setup the updater.
+	 *
+	 * composer require yahnis-elsts/plugin-update-checker
+	 *
+	 * @since 0.1.0
+	 *
+	 * @uses https://github.com/YahnisElsts/plugin-update-checker/
+	 *
+	 * @return void
+	 */
+	public function updater() {
+
+		// Bail if current user cannot manage plugins.
+		if ( ! current_user_can( 'install_plugins' ) ) {
+			return;
+		}
+
+		// Bail if plugin updater is not loaded.
+		if ( ! class_exists( 'Puc_v4_Factory' ) ) {
+			return;
+		}
+
+		// Setup the updater.
+		$updater = Puc_v4_Factory::buildUpdateChecker( 'https://github.com/maithemewp/mai-accordion/', __FILE__, 'mai-accordion' );
+
+		// Maybe set github api token.
+		if ( defined( 'MAI_GITHUB_API_TOKEN' ) ) {
+			$updater->setAuthentication( MAI_GITHUB_API_TOKEN );
+		}
+	}
+
+	public function run() {
+		if ( ! function_exists( 'mai_get_engine_theme' ) ) {
+			return;
+		}
+
+		new Mai_Accordion_Block;
+	}
 }
 
-add_action( 'acf/init', 'mai_register_accordion_field_groups' );
 /**
- * Register Mai Columns block field group.
+ * The main function for that returns Mai_Accordion_Plugin
  *
- * @since TBD
+ * The main function responsible for returning the one true Mai_Accordion_Plugin
+ * Instance to functions everywhere.
  *
- * @return void
+ * Use this function like you would a global variable, except without needing
+ * to declare the global.
+ *
+ * Example: <?php $plugin = Mai_Accordion_Plugin(); ?>
+ *
+ * @since 0.1.0
+ *
+ * @return object|Mai_Accordion_Plugin The one true Mai_Accordion_Plugin Instance.
  */
-function mai_register_accordion_field_groups() {
-	if ( ! function_exists( 'acf_add_local_field_group' ) ) {
-		return;
-	}
-
-	acf_add_local_field_group(
-		[
-			'key'    => 'mai_accordion',
-			'title'  => __( 'Mai Accordion', 'mai-engine' ),
-			'fields' => [
-				[
-					'key'           => 'mai_accordion',
-					'label'         => __( 'Bottom Spacing', 'mai-engine' ),
-					'name'          => 'row_gap',
-					'type'          => 'button_group',
-					'default_value' => 'md',
-					'choices'       => [
-						''   => __( 'None', 'mai-engine' ),
-						'xs' => __( 'XS', 'mai-engine' ),
-						'sm' => __( 'SM', 'mai-engine' ),
-						'md' => __( 'MD', 'mai-engine' ),
-						'lg' => __( 'LG', 'mai-engine' ),
-						'xl' => __( 'XL', 'mai-engine' ),
-					],
-				],
-			],
-			'location' => [
-				[
-					[
-						'param'    => 'block',
-						'operator' => '==',
-						'value'    => 'acf/mai-accordion',
-					],
-				],
-			],
-			'active' => true,
-		],
-	);
-
-	acf_add_local_field_group(
-		[
-			'key'       => 'mai_accordion_item',
-			'title'     => __( 'Mai Accordion Item', 'mai-engine' ),
-			'fields'    => [
-				[
-					'key'   => 'title',
-					'label' => __( 'Title', 'mai-engine' ),
-					'name'  => 'title',
-					'type'  => 'text',
-				],
-			],
-			'location' => [
-				[
-					[
-						'param'    => 'block',
-						'operator' => '==',
-						'value'    => 'acf/mai-accordion-item',
-					],
-				],
-			],
-			'active'  => true,
-		],
-	);
+function Mai_Accordion_Plugin() {
+	return Mai_Accordion_Plugin::instance();
 }
 
-/**
- * Callback function to render the accordion block.
- *
- * @since TBD
- *
- * @param array  $block      The block settings and attributes.
- * @param string $content    The block inner HTML (empty).
- * @param bool   $is_preview True during AJAX preview.
- * @param int    $post_id    The post ID this block is saved to.
- *
- * @return void
- */
-function mai_do_accordion_block( $block, $content = '', $is_preview = false, $post_id = 0 ) {
-	$allowed    = [ 'acf/mai-accordion-item' ];
-	$template   = [
-		[ 'acf/mai-accordion-item', [], [] ]
-	];
-	$attributes = [
-		'class' => 'mai-accordion',
-		'style' => '',
-	];
-
-	if ( isset( $block['className'] ) && $block['className'] ) {
-		$attributes['class'] = mai_add_classes( $block['className'], $attributes['class'] );
-	}
-
-	$row_gap = get_field( 'row_gap' );
-	$row_gap = $row_gap ? sprintf( 'var(--spacing-%s)', esc_html( $row_gap ) ) : 0;
-
-	$attributes['style'] .= sprintf( '--row-gap:%s;', $row_gap );
-
-	// if ( isset( $block['align'] ) && $block['align'] ) {
-	// 	$attributes['class'] .= ' align' . $block['align'];
-	// }
-
-	genesis_markup(
-		[
-			'open'    => '<div %s>',
-			'close'   => '</div>',
-			'context' => 'mai-accordion',
-			'content' => sprintf( '<InnerBlocks allowedBlocks="%s" template="%s" />', esc_attr( wp_json_encode( $allowed ) ), esc_attr( wp_json_encode( $template ) ) ),
-			'echo'    => true,
-			'atts'    => $attributes,
-		]
-	);
-
-}
-
-function mai_do_accordion_item_block() {
-
-	$attributes = [
-		'class' => 'mai-accordion-item',
-	];
-
-	if ( isset( $block['className'] ) && $block['className'] ) {
-		$attributes['class'] = mai_add_classes( $block['className'], $attributes['class'] );
-	}
-
-	$content  = sprintf( '<summary class="mai-accordion-summary">%s</summary>', esc_html( get_field( 'title' ) ) );
-	$content .= '<div class="mai-accordion-content">';
-		$content .= '<InnerBlocks />';
-	$content .= '</div>';
-
-	genesis_markup(
-		[
-			'open'    => '<details %s>',
-			'close'   => '</details>',
-			'context' => 'mai-accordion-item',
-			'content' => $content,
-			'echo'    => true,
-			'atts'    => $attributes,
-		]
-	);
-}
-
-function mai_accordion_enqueue_assets() {
-	wp_enqueue_style( 'mai-accordion', plugin_dir_url( __FILE__ ) . 'mai-accordion.css', [], '0.1.1' );
-}
+// Get Mai_Accordion_Plugin Running.
+Mai_Accordion_Plugin();
