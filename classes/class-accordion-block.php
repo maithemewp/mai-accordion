@@ -21,7 +21,7 @@ class Mai_Accordion_Block {
 				'render_callback' => [ $this, 'do_accordion' ],
 				'category'        => 'widget',
 				'keywords'        => [ 'accordion', 'faq', 'toggle' ],
-				// 'icon'            => mai_get_svg_icon( 'rectangle-portrait', 'light' ),
+				'icon'            => mai_get_svg_icon( 'bars', 'light' ),
 				'enqueue_assets'  => 'mai_enqueue_accordion_styles',
 				'supports'        => [
 					'align' => false,
@@ -38,7 +38,7 @@ class Mai_Accordion_Block {
 				'description'     => __( 'A custom accordion item block.', 'mai-accordion' ),
 				'render_callback' => [ $this, 'do_accordion_item' ],
 				'category'        => 'widget',
-				'icon'            => mai_get_svg_icon( 'rectangle-portrait', 'light' ),
+				'icon'            => mai_get_svg_icon( 'bars', 'light' ),
 				'parent'          => [ 'acf/mai-accordion' ],
 				'supports'        => [
 					'align' => false,
@@ -113,6 +113,9 @@ class Mai_Accordion_Block {
 							'md' => __( 'M', 'mai-engine' ),
 							'lg' => __( 'L', 'mai-engine' ),
 							'xl' => __( 'XL', 'mai-engine' ),
+						],
+						'wrapper' => [
+							'class' => 'mai-acf-button-group',
 						],
 					],
 				],
