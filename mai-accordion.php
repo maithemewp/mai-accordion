@@ -163,6 +163,7 @@ final class Mai_Accordion_Plugin {
 	 * @return void
 	 */
 	public function updater() {
+
 		// Bail if current user cannot manage plugins.
 		if ( ! current_user_can( 'install_plugins' ) ) {
 			return;
