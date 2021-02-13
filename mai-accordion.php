@@ -184,7 +184,7 @@ final class Mai_Accordion_Plugin {
 		// Add icons for Dashboard > Updates screen.
 		if ( function_exists( 'mai_get_updater_icons' ) && $icons = mai_get_updater_icons() ) {
 			$updater->addResultFilter(
-				function ( $info ) {
+				function ( $info ) use ( $icons ) {
 					$info->icons = $icons;
 					return $info;
 				}
