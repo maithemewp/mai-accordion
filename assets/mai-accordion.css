@@ -38,11 +38,14 @@
 }
 
 .mai-accordion-summary::after {
+	position: absolute;
+	top: 50%;
+	right: 0.5em;
 	width: 1em;
 	height: 1em;
-	margin-top: var(--spacing-xxs);
 	margin-left: auto;
 	background: currentColor;
+	transform: translateY(-50%);
 	-webkit-mask-image: var(--accordion-icon, var(--icon-plus));
 	mask-image: var(--accordion-icon, var(--icon-plus));
 	-webkit-mask-repeat: no-repeat;
@@ -72,6 +75,7 @@
 }
 
 .mai-accordion-title {
+	max-width: calc(100% - 2em);
 	margin-right: var(--spacing-sm);
 }
 
