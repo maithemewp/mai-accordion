@@ -32,8 +32,9 @@
 	letter-spacing: var(--accordion-summary-letter-spacing, var(--heading-letter-spacing, normal));
 }
 
+.mai-accordion-summary::-webkit-details-marker,
 .mai-accordion-summary::marker {
-	content: "";
+	display: none;
 }
 
 .mai-accordion-summary::after {
