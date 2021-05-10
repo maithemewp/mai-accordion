@@ -1,6 +1,9 @@
 <?php
 
-class Mai_Accordion_Block {
+// Prevent direct file access.
+defined( 'ABSPATH' ) || die;
+
+class Mai_Accordion_Blocks {
 
 	function __construct() {
 		add_action( 'acf/init', [ $this, 'register_blocks' ], 10, 3 );
@@ -61,7 +64,7 @@ class Mai_Accordion_Block {
 		echo $accordion->get();
 	}
 
-	function do_accordion_item() {
+	function do_accordion_item( $block, $content = '', $is_preview = false ) {
 		$args = [
 			'content' => $this->get_accordion_item_inner_blocks(),
 			'title'   => get_field( 'title' ),
@@ -97,11 +100,11 @@ class Mai_Accordion_Block {
 
 		acf_add_local_field_group(
 			[
-				'key'    => 'mai_accordion',
+				'key'    => 'mai_accordion_field_group',
 				'title'  => __( 'Mai Accordion', 'mai-engine' ),
 				'fields' => [
 					[
-						'key'           => 'mai_accordion',
+						'key'           => 'mai_accordion_row_gap',
 						'label'         => __( 'Bottom Spacing', 'mai-engine' ),
 						'name'          => 'row_gap',
 						'type'          => 'button_group',
@@ -134,11 +137,11 @@ class Mai_Accordion_Block {
 
 		acf_add_local_field_group(
 			[
-				'key'       => 'mai_accordion_item',
+				'key'       => 'mai_accordion_item_field_group',
 				'title'     => __( 'Mai Accordion Item', 'mai-engine' ),
 				'fields'    => [
 					[
-						'key'   => 'title',
+						'key'   => 'mai_accordion_item_title',
 						'label' => __( 'Title', 'mai-engine' ),
 						'name'  => 'title',
 						'type'  => 'text',
