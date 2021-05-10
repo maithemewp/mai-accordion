@@ -193,12 +193,17 @@ final class Mai_Accordion_Plugin {
 		}
 	}
 
+	/**
+	 * Runs plugin if Mai Engine is active.
+	 *
+	 * @return Mai_Accordion_Blocks
+	 */
 	public function run() {
 		if ( ! function_exists( 'mai_get_engine_theme' ) ) {
 			return;
 		}
 
-		new Mai_Accordion_Block;
+		new Mai_Accordion_Blocks;
 	}
 }
 
@@ -217,9 +222,9 @@ final class Mai_Accordion_Plugin {
  *
  * @return object|Mai_Accordion_Plugin The one true Mai_Accordion_Plugin Instance.
  */
-function Mai_Accordion_Plugin() {
+function mai_accordion() {
 	return Mai_Accordion_Plugin::instance();
 }
 
 // Get Mai_Accordion_Plugin Running.
-Mai_Accordion_Plugin();
+mai_accordion();
