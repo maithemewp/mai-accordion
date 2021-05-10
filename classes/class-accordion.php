@@ -1,5 +1,8 @@
 <?php
 
+// Prevent direct file access.
+defined( 'ABSPATH' ) || die;
+
 class Mai_Accordion {
 	protected $args;
 	protected $block;
