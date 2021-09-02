@@ -24,6 +24,7 @@
 	position: relative;
 	z-index: 1;
 	display: flex;
+	min-height: 2rem;
 	margin: 0;
 	padding: var(--accordion-summary-padding, var(--spacing-xs) var(--spacing-md));
 	font-weight: var(--accordion-summary-font-weight, var(--heading-font-weight, normal));

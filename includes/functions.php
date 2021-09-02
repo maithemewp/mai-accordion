@@ -10,11 +10,30 @@ function mai_get_accordion_item( $args ) {
 	return $accordion->get();
 }
 
-function mai_enqueue_accordion_styles() {
+function mai_enqueue_accordion_styles( $preview = false ) {
 	static $enqueued = false;
 	if ( $enqueued ) {
 		return;
 	}
-	wp_enqueue_style( 'mai-accordion', MAI_ACCORDION_PLUGIN_URL . 'assets/mai-accordion.css', [], MAI_ACCORDION_VERSION . '.' . date( 'njYHi', filemtime( MAI_ACCORDION_PLUGIN_DIR . 'assets/mai-accordion.css' ) ) );
+	$suffix = mai_get_suffix();
+	wp_enqueue_style( 'mai-accordion', MAI_ACCORDION_PLUGIN_URL . sprintf( 'assets/mai-accordion.%scss', $suffix ), [], MAI_ACCORDION_VERSION . '.' . date( 'njYHi', filemtime( MAI_ACCORDION_PLUGIN_DIR . sprintf( 'assets/mai-accordion.%scss', $suffix ) ) ) );
+	if ( $preview ) {
+		wp_enqueue_style( 'mai-accordion-editor', MAI_ACCORDION_PLUGIN_URL . sprintf( 'assets/mai-accordion-editor.%scss', $suffix ), [], MAI_ACCORDION_VERSION . '.' . date( 'njYHi', filemtime( MAI_ACCORDION_PLUGIN_DIR . sprintf( 'assets/mai-accordion-editor.%scss', $suffix ) ) ) );
+	}
 	$enqueued = true;
+}
+
+/**
+ * Gets the script/style `.min` suffix for minified files.
+ *
+ * @return string
+ */
+function mai_get_suffix() {
+	static $suffix = null;
+	if ( ! is_null( $suffix ) ) {
+		return $suffix;
+	}
+	$debug  = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG;
+	$suffix = $debug ? '' : '.min';
+	return $suffix;
 }

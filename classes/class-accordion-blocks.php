@@ -25,7 +25,6 @@ class Mai_Accordion_Blocks {
 				'category'        => 'widget',
 				'keywords'        => [ 'accordion', 'faq', 'toggle' ],
 				'icon'            => mai_get_svg_icon( 'bars', 'light' ),
-				'enqueue_assets'  => 'mai_enqueue_accordion_styles',
 				'supports'        => [
 					'align' => false,
 					'mode'  => false,
@@ -54,6 +53,7 @@ class Mai_Accordion_Blocks {
 
 	function do_accordion( $block, $content = '', $is_preview = false ) {
 		$args = [
+			'preview' => $is_preview,
 			'content' => $this->get_accordion_inner_blocks(),
 			'row_gap' => get_field( 'row_gap' ),
 		];
@@ -66,6 +66,7 @@ class Mai_Accordion_Blocks {
 
 	function do_accordion_item( $block, $content = '', $is_preview = false ) {
 		$args = [
+			'preview' => $is_preview,
 			'content' => $this->get_accordion_item_inner_blocks(),
 			'title'   => get_field( 'title' ),
 		];
