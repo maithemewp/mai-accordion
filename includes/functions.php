@@ -16,9 +16,9 @@ function mai_enqueue_accordion_styles( $preview = false ) {
 		return;
 	}
 	$suffix = mai_get_suffix();
-	wp_enqueue_style( 'mai-accordion', MAI_ACCORDION_PLUGIN_URL . sprintf( 'assets/mai-accordion.%scss', $suffix ), [], MAI_ACCORDION_VERSION . '.' . date( 'njYHi', filemtime( MAI_ACCORDION_PLUGIN_DIR . sprintf( 'assets/mai-accordion.%scss', $suffix ) ) ) );
+	wp_enqueue_style( 'mai-accordion', MAI_ACCORDION_PLUGIN_URL . sprintf( 'assets/mai-accordion%s.css', $suffix ), [], MAI_ACCORDION_VERSION . '.' . date( 'njYHi', filemtime( MAI_ACCORDION_PLUGIN_DIR . sprintf( 'assets/mai-accordion%s.css', $suffix ) ) ) );
 	if ( $preview ) {
-		wp_enqueue_style( 'mai-accordion-editor', MAI_ACCORDION_PLUGIN_URL . sprintf( 'assets/mai-accordion-editor.%scss', $suffix ), [], MAI_ACCORDION_VERSION . '.' . date( 'njYHi', filemtime( MAI_ACCORDION_PLUGIN_DIR . sprintf( 'assets/mai-accordion-editor.%scss', $suffix ) ) ) );
+		wp_enqueue_style( 'mai-accordion-editor', MAI_ACCORDION_PLUGIN_URL . sprintf( 'assets/mai-accordion-editor%s.css', $suffix ), [], MAI_ACCORDION_VERSION . '.' . date( 'njYHi', filemtime( MAI_ACCORDION_PLUGIN_DIR . sprintf( 'assets/mai-accordion-editor%s.css', $suffix ) ) ) );
 	}
 	$enqueued = true;
 }
