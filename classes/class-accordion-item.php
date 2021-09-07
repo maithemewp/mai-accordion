@@ -21,7 +21,7 @@ class Mai_Accordion_Item {
 
 	function get_sanitized_args( $args ) {
 		$args['preview'] = rest_sanitize_boolean( $args['preview'] );
-		$args['title']   = esc_html( $args['title'] );
+		$args['title']   = do_shortcode( wp_kses_post( $args['title'] ) );
 		$args['content'] = $args['content'];
 		$args['class']   = esc_html( $args['class'] );
 		return $args;
