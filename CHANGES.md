@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.0 (9/15/21)
+* Added: New custom icons for accordion blocks.
+* Changed: Major UI improvements. Adding a title and new accordion items are now much easier.
+* Fixed: Accordion CSS was not enqueued when first adding a block to the editor in some instances.
+
 ## 0.3.1 (4/21/21)
 * Changed: Update updater.
 

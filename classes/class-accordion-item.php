@@ -12,6 +12,7 @@ class Mai_Accordion_Item {
 
 	function get_defaults() {
 		return [
+			'preview' => false,
 			'title'   => '',
 			'content' => '',
 			'class'   => '',
@@ -19,7 +20,8 @@ class Mai_Accordion_Item {
 	}
 
 	function get_sanitized_args( $args ) {
-		$args['title']   = esc_html( $args['title'] );
+		$args['preview'] = rest_sanitize_boolean( $args['preview'] );
+		$args['title']   = do_shortcode( wp_kses_post( $args['title'] ) );
 		$args['content'] = $args['content'];
 		$args['class']   = esc_html( $args['class'] );
 		return $args;
@@ -36,6 +38,10 @@ class Mai_Accordion_Item {
 
 		if ( $this->args['class'] ) {
 			$attributes['class'] = mai_add_classes( $this->args['class'], $attributes['class'] );
+		}
+
+		if ( ! $this->args['title'] ) {
+			$this->args['title'] = $this->args['preview'] ? sprintf( '<span style="color:var(--body-color);font-family:var(--body-font-family);font-weight:var(--body-font-weight);font-size:var(--body-font-size);opacity:0.62;">%s</span>', __( 'Click here to enter title in block sidebar', 'mai-engine' ) ) : '';
 		}
 
 		if ( ! $this->block ) {

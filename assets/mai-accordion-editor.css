@@ -1,0 +1,14 @@
+.block-list-appender__toggle[aria-label$="Mai Accordion Item"] {
+	position: relative;
+}
+
+.block-list-appender__toggle[aria-label$="Mai Accordion Item"]::after {
+	position: absolute;
+	top: 50%;
+	left: calc(100% + 10px);
+	display: block;
+	width: 200px;
+	text-align: left;
+	transform: translateY(-50%);
+	content: attr(aria-label);
+}

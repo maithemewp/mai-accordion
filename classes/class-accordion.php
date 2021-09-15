@@ -1,5 +1,8 @@
 <?php
 
+// Prevent direct file access.
+defined( 'ABSPATH' ) || die;
+
 class Mai_Accordion {
 	protected $args;
 	protected $block;
@@ -12,6 +15,7 @@ class Mai_Accordion {
 
 	function get_defaults() {
 		return [
+			'preview' => false,
 			'content' => '', // Required.
 			'class'   => '',
 			'row_gap' => 'md',
@@ -19,6 +23,7 @@ class Mai_Accordion {
 	}
 
 	function get_sanitized_args( $args ) {
+		$args['preview'] = rest_sanitize_boolean( $args['preview'] );
 		$args['content'] = $args['content'];
 		$args['class']   = esc_html( $args['class'] );
 		$args['row_gap'] = esc_html( $args['row_gap'] );
@@ -30,7 +35,7 @@ class Mai_Accordion {
 			return;
 		}
 
-		mai_enqueue_accordion_styles();
+		mai_enqueue_accordion_styles( $this->args['preview'] );
 
 		$attributes = [
 			'class' => 'mai-accordion',
