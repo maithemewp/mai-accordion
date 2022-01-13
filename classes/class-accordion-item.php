@@ -4,12 +4,26 @@ class Mai_Accordion_Item {
 	protected $args;
 	protected $block;
 
+	/**
+	 * Gets it started.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @return void
+	 */
 	function __construct( $args, $block = false ) {
 		$args        = wp_parse_args( $args, $this->get_defaults() );
 		$this->args  = $this->get_sanitized_args( $args );
 		$this->block = $block;
 	}
 
+	/**
+	 * Gets defaults.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @return void
+	 */
 	function get_defaults() {
 		return [
 			'preview' => false,
@@ -19,6 +33,13 @@ class Mai_Accordion_Item {
 		];
 	}
 
+	/**
+	 * Gets sanitized args.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @return void
+	 */
 	function get_sanitized_args( $args ) {
 		$args['preview'] = rest_sanitize_boolean( $args['preview'] );
 		$args['title']   = do_shortcode( wp_kses_post( $args['title'] ) );
@@ -27,6 +48,13 @@ class Mai_Accordion_Item {
 		return $args;
 	}
 
+	/**
+	 * Gets the accordion item.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @return void
+	 */
 	function get() {
 		if ( ! function_exists( 'mai_get_engine_theme' ) ) {
 			return;

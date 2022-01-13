@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.1.0 (1/13/22)
+* Added: Anchor field on accordion block.
+
 ## 1.0.0 (9/15/21)
 * Added: New custom icons for accordion blocks.
 * Changed: Major UI improvements. Adding a title and new accordion items are now much easier.

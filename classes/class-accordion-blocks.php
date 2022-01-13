@@ -4,18 +4,30 @@
 defined( 'ABSPATH' ) || die;
 
 class Mai_Accordion_Blocks {
-
+	/**
+	 * Gets it started.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @return void
+	 */
 	function __construct() {
 		add_action( 'acf/init', [ $this, 'register_blocks' ], 10, 3 );
 		add_action( 'acf/init', [ $this, 'register_field_group' ], 10, 3 );
 	}
 
+	/**
+	 * Registers blocks.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @return void
+	 */
 	function register_blocks() {
 		if ( ! function_exists( 'acf_register_block_type' ) ) {
 			return;
 		}
 
-		// Register.
 		acf_register_block_type(
 			[
 				'name'            => 'mai-accordion',
@@ -29,9 +41,10 @@ class Mai_Accordion_Blocks {
 					mai_enqueue_accordion_styles( is_admin() );
 				},
 				'supports'        => [
-					'align' => false,
-					'mode'  => false,
-					'jsx'   => true,
+					'align'  => false,
+					'anchor' => true,
+					'mode'   => false,
+					'jsx'    => true,
 				],
 			]
 		);
@@ -54,32 +67,63 @@ class Mai_Accordion_Blocks {
 		);
 	}
 
+	/**
+	 * Renders the accordion container.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @return void
+	 */
 	function do_accordion( $block, $content = '', $is_preview = false ) {
 		$args = [
 			'preview' => $is_preview,
 			'content' => $this->get_accordion_inner_blocks(),
 			'row_gap' => get_field( 'row_gap' ),
 		];
+
+		if ( isset( $block['anchor'] ) && ! empty( $block['anchor'] ) ) {
+			$args['id'] = $block['anchor'];
+		}
+
 		if ( isset( $block['className'] ) && ! empty( $block['className'] ) ) {
 			$args['class'] = $block['className'];
 		}
+
 		$accordion = new Mai_Accordion( $args, true );
+
 		echo $accordion->get();
 	}
 
+	/**
+	 * Renders each accordion item.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @return void
+	 */
 	function do_accordion_item( $block, $content = '', $is_preview = false ) {
 		$args = [
 			'preview' => $is_preview,
 			'content' => $this->get_accordion_item_inner_blocks(),
 			'title'   => get_field( 'title' ),
 		];
+
 		if ( isset( $block['className'] ) && ! empty( $block['className'] ) ) {
 			$args['class'] = $block['className'];
 		}
+
 		$accordion = new Mai_Accordion_Item( $args, true );
+
 		echo $accordion->get();
 	}
 
+	/**
+	 * Gets accordion inner blocks.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @return void
+	 */
 	function get_accordion_inner_blocks() {
 		$allowed    = [ 'acf/mai-accordion-item' ];
 		$template   = [
@@ -89,6 +133,13 @@ class Mai_Accordion_Blocks {
 		return sprintf( '<InnerBlocks allowedBlocks="%s" template="%s" />', esc_attr( wp_json_encode( $allowed ) ), esc_attr( wp_json_encode( $template ) ) );
 	}
 
+	/**
+	 * Gets accordion item inner blocks.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @return void
+	 */
 	function get_accordion_item_inner_blocks() {
 		$template = [
 			[ 'core/paragraph', [], [] ],
@@ -97,6 +148,13 @@ class Mai_Accordion_Blocks {
 		return sprintf( '<InnerBlocks template="%s" />', esc_attr( wp_json_encode( $template ) ) );
 	}
 
+	/**
+	 * Registers field groups.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @return void
+	 */
 	function register_field_group() {
 		if ( ! function_exists( 'acf_add_local_field_group' ) ) {
 			return;
