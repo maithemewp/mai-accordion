@@ -4,7 +4,7 @@
  * Plugin Name:     Mai Accordion
  * Plugin URI:      https://bizbudding.com/products/mai-accordion/
  * Description:     Custom block for adding JS-free accordions to your content.
- * Version:         1.0.0
+ * Version:         1.1.0
  *
  * Author:          BizBudding
  * Author URI:      https://bizbudding.com
@@ -19,7 +19,6 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  * @since 0.1.0
  */
 final class Mai_Accordion_Plugin {
-
 	/**
 	 * @var   Mai_Accordion_Plugin The one true Mai_Accordion
 	 * @since 0.1.0
@@ -90,7 +89,7 @@ final class Mai_Accordion_Plugin {
 
 		// Plugin version.
 		if ( ! defined( 'MAI_ACCORDION_VERSION' ) ) {
-			define( 'MAI_ACCORDION_VERSION', '1.0.0' );
+			define( 'MAI_ACCORDION_VERSION', '1.1.0' );
 		}
 
 		// Plugin Folder Path.
@@ -147,7 +146,7 @@ final class Mai_Accordion_Plugin {
 	 * @return void
 	 */
 	public function hooks() {
-		add_action( 'admin_init', [ $this, 'updater' ] );
+		add_action( 'admin_init',     [ $this, 'updater' ] );
 		add_action( 'plugins_loaded', [ $this, 'run' ] );
 	}
 
@@ -163,7 +162,6 @@ final class Mai_Accordion_Plugin {
 	 * @return void
 	 */
 	public function updater() {
-
 		// Bail if current user cannot manage plugins.
 		if ( ! current_user_can( 'install_plugins' ) ) {
 			return;

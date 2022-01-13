@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => '6d9eb1088b91295215298db5bb6295656c60be39',
+    'reference' => '0ae55ed3915022e58cd60d2902ac693fc2d96cb8',
     'name' => '__root__',
   ),
   'versions' => 
@@ -18,7 +18,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => '6d9eb1088b91295215298db5bb6295656c60be39',
+      'reference' => '0ae55ed3915022e58cd60d2902ac693fc2d96cb8',
     ),
     'yahnis-elsts/plugin-update-checker' => 
     array (
