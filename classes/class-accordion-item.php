@@ -1,5 +1,8 @@
 <?php
 
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) exit;
+
 class Mai_Accordion_Item {
 	protected $args;
 	protected $block;
@@ -27,6 +30,7 @@ class Mai_Accordion_Item {
 	function get_defaults() {
 		return [
 			'preview' => false,
+			'open'    => false,
 			'title'   => '',
 			'content' => '',
 			'class'   => '',
@@ -42,9 +46,11 @@ class Mai_Accordion_Item {
 	 */
 	function get_sanitized_args( $args ) {
 		$args['preview'] = rest_sanitize_boolean( $args['preview'] );
+		$args['open']    = rest_sanitize_boolean( $args['open'] );
 		$args['title']   = do_shortcode( wp_kses_post( $args['title'] ) );
 		$args['content'] = $args['content'];
 		$args['class']   = esc_html( $args['class'] );
+
 		return $args;
 	}
 
@@ -56,16 +62,24 @@ class Mai_Accordion_Item {
 	 * @return void
 	 */
 	function get() {
-		if ( ! function_exists( 'mai_get_engine_theme' ) ) {
+		if ( ! class_exists( 'Mai_Engine' ) ) {
 			return;
 		}
 
-		$attributes = [
+		$details_atts = [
 			'class' => 'mai-accordion-item',
 		];
 
+		$summary_atts = [
+			'class' => 'mai-accordion-summary',
+		];
+
+		if ( $this->args['open'] ) {
+			$details_atts['open'] = true;
+		}
+
 		if ( $this->args['class'] ) {
-			$attributes['class'] = mai_add_classes( $this->args['class'], $attributes['class'] );
+			$summary_atts['class'] = mai_add_classes( $this->args['class'], $summary_atts['class'] );
 		}
 
 		if ( ! $this->args['title'] ) {
@@ -83,9 +97,7 @@ class Mai_Accordion_Item {
 				'context' => 'mai-accordion-item-summary',
 				'content' => sprintf( '<span class="mai-accordion-title">%s</span>', $this->args['title'] ),
 				'echo'    => false,
-				'atts'    => [
-					'class' => 'mai-accordion-summary',
-				],
+				'atts'    => $summary_atts,
 			]
 		);
 
@@ -109,7 +121,7 @@ class Mai_Accordion_Item {
 				'context' => 'mai-accordion-item',
 				'content' => $summary . $content,
 				'echo'    => false,
-				'atts'    => $attributes,
+				'atts'    => $details_atts,
 			]
 		);
 	}

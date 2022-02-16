@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.2.0 (2/16/22)
+* Added: Mai Accordion Item can now be set to load open by default.
+
 ## 1.1.0 (1/13/22)
 * Added: Anchor field on accordion block.
 

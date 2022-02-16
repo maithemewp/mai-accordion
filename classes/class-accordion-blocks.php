@@ -1,7 +1,7 @@
 <?php
 
-// Prevent direct file access.
-defined( 'ABSPATH' ) || die;
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 class Mai_Accordion_Blocks {
 	/**
@@ -106,6 +106,7 @@ class Mai_Accordion_Blocks {
 			'preview' => $is_preview,
 			'content' => $this->get_accordion_item_inner_blocks(),
 			'title'   => get_field( 'title' ),
+			'open'    => get_field( 'open' ),
 		];
 
 		if ( isset( $block['className'] ) && ! empty( $block['className'] ) ) {
@@ -207,6 +208,12 @@ class Mai_Accordion_Blocks {
 						'label' => __( 'Title', 'mai-engine' ),
 						'name'  => 'title',
 						'type'  => 'text',
+					],
+					[
+						'key'     => 'mai_accordion_item_open',
+						'name'    => 'open',
+						'type'    => 'true_false',
+						'message' => __( 'Load open by default', 'mai-engine' ),
 					],
 				],
 				'location' => [
