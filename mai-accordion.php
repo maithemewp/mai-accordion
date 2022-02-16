@@ -89,7 +89,7 @@ final class Mai_Accordion_Plugin {
 
 		// Plugin version.
 		if ( ! defined( 'MAI_ACCORDION_VERSION' ) ) {
-			define( 'MAI_ACCORDION_VERSION', '1.1.0' );
+			define( 'MAI_ACCORDION_VERSION', '1.2.0' );
 		}
 
 		// Plugin Folder Path.
