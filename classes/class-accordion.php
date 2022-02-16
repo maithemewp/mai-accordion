@@ -1,7 +1,7 @@
 <?php
 
-// Prevent direct file access.
-defined( 'ABSPATH' ) || die;
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 class Mai_Accordion {
 	protected $args;
@@ -61,7 +61,7 @@ class Mai_Accordion {
 	 * @return void
 	 */
 	function get() {
-		if ( ! function_exists( 'mai_get_engine_theme' ) ) {
+		if ( ! class_exists( 'Mai_Engine' ) ) {
 			return;
 		}
 
