@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.3.0 (4/4/22)
+* Fixed: Block styling not loading in the editor in some scenarios.
+
 ## 1.2.0 (2/16/22)
 * Added: Mai Accordion Item can now be set to load open by default.
 
