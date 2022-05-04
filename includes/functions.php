@@ -32,6 +32,18 @@ function mai_get_accordion_item( $args ) {
 }
 
 /**
+ * Enqueues accordion styles.
+ *
+ * @since 1.4.0
+ *
+ * @return void
+ */
+function mai_accordion_enqueue_styles() {
+	$suffix = mai_accordion_get_suffix();
+	wp_enqueue_style( 'mai-accordion', MAI_ACCORDION_PLUGIN_URL . sprintf( 'assets/mai-accordion%s.css', $suffix ), [], MAI_ACCORDION_VERSION . '.' . date( 'njYHi', filemtime( MAI_ACCORDION_PLUGIN_DIR . sprintf( 'assets/mai-accordion%s.css', $suffix ) ) ) );
+}
+
+/**
  * Gets the script/style `.min` suffix for minified files.
  *
  * @since 0.1.0

@@ -65,6 +65,8 @@ class Mai_Accordion {
 			return;
 		}
 
+		mai_accordion_enqueue_styles();
+
 		$attributes = [
 			'class' => 'mai-accordion',
 			'style' => '',
@@ -89,38 +91,10 @@ class Mai_Accordion {
 				'open'    => '<div %s>',
 				'close'   => '</div>',
 				'context' => 'mai-accordion',
-				'content' => $this->get_css() . $this->args['content'],
+				'content' => $this->args['content'],
 				'echo'    => false,
 				'atts'    => $attributes,
 			]
 		);
-	}
-
-	/**
-	 * Gets the inline CSS.
-	 *
-	 * @since TBD
-	 *
-	 * @return string
-	 */
-	function get_css() {
-		static $css = null;
-
-		if ( ! is_null( $css) && has_action( 'wp_print_scripts' ) ) {
-			return $css;
-		}
-
-		$suffix = mai_accordion_get_suffix();
-		$url    = MAI_ACCORDION_PLUGIN_URL . sprintf( 'assets/mai-accordion%s.css', $suffix );
-		$url    = add_query_arg( [ 'ver' => MAI_ACCORDION_VERSION . '.' . date( 'njYHi', filemtime( MAI_ACCORDION_PLUGIN_DIR . sprintf( 'assets/mai-accordion%s.css', $suffix ) ) ) ], $url );
-		$css    = sprintf( '<link rel="stylesheet" href="%s">', $url );
-
-		if ( $this->args['preview'] ) {
-			$url  = MAI_ACCORDION_PLUGIN_URL . sprintf( 'assets/mai-accordion-editor%s.css', $suffix );
-			$url  = add_query_arg( [ 'ver' => MAI_ACCORDION_VERSION . '.' . date( 'njYHi', filemtime( MAI_ACCORDION_PLUGIN_DIR . sprintf( 'assets/mai-accordion-editor%s.css', $suffix ) ) ) ], $url );
-			$css .= sprintf( '<link rel="stylesheet" href="%s">', $url );
-		}
-
-		return $css;
 	}
 }

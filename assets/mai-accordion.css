@@ -66,11 +66,11 @@
 	color: var(--color-link);
 }
 
-.mai-accordion-item[open] {
+.mai-accordion-item[open] > .mai-accordion-summary {
 	--accordion-icon: var(--accordion-icon-open, var(--icon-minus));
 }
 
-.mai-accordion-item[open] .mai-accordion-summary ~ * {
+.mai-accordion-item[open] > .mai-accordion-summary ~ * {
 	-webkit-animation: mai-accordion 0.3s ease-in-out;
 	animation: mai-accordion 0.3s ease-in-out;
 }
