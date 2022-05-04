@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.4.0 (5/4/22)
+* Fixed: Nested accordion toggle icons now display correctly.
+* Fixed: Styles loading multiple times in some scenarios.
+* Changed: Enqueue styles once in header instead of on-demand.
+
 ## 1.3.0 (4/4/22)
 * Fixed: Block styling not loading in the editor in some scenarios.
 

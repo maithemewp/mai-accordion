@@ -65,6 +65,8 @@ class Mai_Accordion {
 			return;
 		}
 
+		mai_accordion_enqueue_styles();
+
 		$attributes = [
 			'class' => 'mai-accordion',
 			'style' => '',
@@ -104,9 +106,11 @@ class Mai_Accordion {
 	 * @return string
 	 */
 	function get_css() {
+		return '';
+
 		static $css = null;
 
-		if ( ! is_null( $css) && has_action( 'wp_print_scripts' ) ) {
+		if ( ! is_null( $css ) && did_action( 'wp_print_scripts' ) ) {
 			return $css;
 		}
 
