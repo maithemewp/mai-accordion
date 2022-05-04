@@ -1,2 +1,2 @@
 # Mai Accordion
-Custom accordion block for content toggles, transcripts, faq's, etc.
+Add JS-free accordion toggles for displaying expandable FAQs, transcripts, resources, research, etc.

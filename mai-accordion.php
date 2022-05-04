@@ -3,8 +3,8 @@
 /**
  * Plugin Name:     Mai Accordion
  * Plugin URI:      https://bizbudding.com/mai-design-pack/
- * Description:     Custom block for adding JS-free accordions to your content.
- * Version:         1.3.0
+ * Description:     Add JS-free accordion toggles for displaying expandable FAQs, transcripts, resources, research, etc.
+ * Version:         1.4.0
  *
  * Author:          BizBudding
  * Author URI:      https://bizbudding.com
@@ -89,7 +89,7 @@ final class Mai_Accordion_Plugin {
 
 		// Plugin version.
 		if ( ! defined( 'MAI_ACCORDION_VERSION' ) ) {
-			define( 'MAI_ACCORDION_VERSION', '1.3.0' );
+			define( 'MAI_ACCORDION_VERSION', '1.4.0' );
 		}
 
 		// Plugin Folder Path.
