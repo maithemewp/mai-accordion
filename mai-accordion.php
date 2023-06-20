@@ -4,7 +4,7 @@
  * Plugin Name:     Mai Accordion
  * Plugin URI:      https://bizbudding.com/mai-design-pack/
  * Description:     Add JS-free accordion toggles for displaying expandable FAQs, transcripts, resources, research, etc.
- * Version:         1.4.0
+ * Version:         1.5.0
  *
  * Author:          BizBudding
  * Author URI:      https://bizbudding.com
@@ -12,6 +12,9 @@
 
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) exit;
+
+// Must be at the top of the file.
+use YahnisElsts\PluginUpdateChecker\v5\PucFactory;
 
 /**
  * Main Mai_Accordion_Plugin Class.
@@ -86,10 +89,9 @@ final class Mai_Accordion_Plugin {
 	 * @return  void
 	 */
 	private function setup_constants() {
-
 		// Plugin version.
 		if ( ! defined( 'MAI_ACCORDION_VERSION' ) ) {
-			define( 'MAI_ACCORDION_VERSION', '1.4.0' );
+			define( 'MAI_ACCORDION_VERSION', '1.5.0' );
 		}
 
 		// Plugin Folder Path.
@@ -146,7 +148,7 @@ final class Mai_Accordion_Plugin {
 	 * @return void
 	 */
 	public function hooks() {
-		add_action( 'admin_init',     [ $this, 'updater' ] );
+		add_action( 'plugins_loaded', [ $this, 'updater' ], 12 );
 		add_action( 'plugins_loaded', [ $this, 'run' ] );
 	}
 
@@ -162,18 +164,12 @@ final class Mai_Accordion_Plugin {
 	 * @return void
 	 */
 	public function updater() {
-		// Bail if current user cannot manage plugins.
-		if ( ! current_user_can( 'install_plugins' ) ) {
-			return;
-		}
-
 		// Bail if plugin updater is not loaded.
-		if ( ! class_exists( 'Puc_v4_Factory' ) ) {
+		if ( ! class_exists( 'YahnisElsts\PluginUpdateChecker\v5\PucFactory' ) ) {
 			return;
 		}
 
-		// Setup the updater.
-		$updater = Puc_v4_Factory::buildUpdateChecker( 'https://github.com/maithemewp/mai-accordion/', __FILE__, 'mai-accordion' );
+		$updater = PucFactory::buildUpdateChecker( 'https://github.com/maithemewp/mai-accordion/', __FILE__, 'mai-accordion' );
 
 		// Maybe set github api token.
 		if ( defined( 'MAI_GITHUB_API_TOKEN' ) ) {

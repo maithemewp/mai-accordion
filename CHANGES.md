@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.5.0 (6/20/23)
+* Changed: Update updater.
+
 ## 1.4.0 (5/4/22)
 * Fixed: Nested accordion toggle icons now display correctly.
 * Fixed: Styles loading multiple times in some scenarios.
