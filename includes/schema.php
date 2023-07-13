@@ -92,25 +92,17 @@ function mai_render_accordion_block_faq_schema( $block_content, $parsed_block, $
 			continue;
 		}
 
-		foreach ( $inner as $part ) {
-			// Strip markup, partially taken from wp_strip_all_tags but allowing <a> links.
-			$text = render_block( $part );
-			$text = preg_replace( '@<(script|style)[^>]*?>.*?</\\1>@si', '', $text ); // Strip script and style tags.
-			$text = strip_tags( $text, [ 'a' ] ); // Strip tags, leave links.
-			$text = trim( $text );
-
-			if ( ! $text ) {
-				continue;
-			}
-
-			$a .= wpautop( $text );
-		}
+		// Build answer and strip markup, partially taken from wp_strip_all_tags but allowing <a> links.
+		$a = do_blocks( serialize_blocks( $inner ) );
+		$a = preg_replace( '@<(script|style)[^>]*?>.*?</\\1>@si', '', $a ); // Strip script and style tags.
+		$a = strip_tags( $a, [ 'a' ] ); // Strip tags, leave links.
+		$a = trim( $a );
 
 		if ( ! $a ) {
 			continue;
 		}
 
-		mai_get_accordion_faq_schema( [ $q, $a ] );
+		mai_get_accordion_faq_schema( [ $q, wpautop( $a ) ] );
 	}
 
 	return $block_content;
