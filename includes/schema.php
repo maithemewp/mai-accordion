@@ -3,7 +3,7 @@
 // Prevent direct file access.
 defined( 'ABSPATH' ) || die;
 
-add_action( 'wp_head', 'mai_render_accordion_faq_schema' );
+add_action( 'wp_footer', 'mai_render_accordion_faq_schema' );
 /**
  * Renders schema from accordion block data.
  *
@@ -12,7 +12,7 @@ add_action( 'wp_head', 'mai_render_accordion_faq_schema' );
  * @return void
  */
 function mai_render_accordion_faq_schema() {
-	$qas = mai_get_accordion_schema_qa();
+	$qas = mai_get_accordion_faq_schema();
 
 	if ( ! $qas ) {
 		return;
@@ -53,9 +53,11 @@ function mai_render_accordion_faq_schema() {
 	printf( '<script type="application/ld+json">%s</script>', wp_json_encode( $schema ) );
 }
 
-add_filter( 'render_block_acf/mai-accordion', 'mai_render_accordion_block', 10, 3 );
+add_filter( 'render_block_acf/mai-accordion', 'mai_render_accordion_block_faq_schema', 10, 3 );
 /**
  * Adds schema from all Mai Accordion blocks.
+ *
+ * @since TBD
  *
  * @param string   $block_content The block content.
  * @param array    $block         The full block, including name and attributes.
@@ -63,11 +65,7 @@ add_filter( 'render_block_acf/mai-accordion', 'mai_render_accordion_block', 10, 
  *
  * @return string
  */
-function mai_render_accordion_block( $block_content, $parsed_block, $wp_block ) {
-	if ( ! function_exists( 'mai_get_dom_document' ) ) {
-		return $block_content;
-	}
-
+function mai_render_accordion_block_faq_schema( $block_content, $parsed_block, $wp_block ) {
 	if ( ! isset( $wp_block->attributes['data']['schema'] ) || 'faq' !== $wp_block->attributes['data']['schema'] ) {
 		return $block_content;
 	}
@@ -81,7 +79,7 @@ function mai_render_accordion_block( $block_content, $parsed_block, $wp_block ) 
 			continue;
 		}
 
-		$q = isset( $block['attrs']['data']['title'] ) ? $block['attrs']['data']['title'] : '';
+		$q = isset( $block['attrs']['data']['title'] ) ? strip_tags( $block['attrs']['data']['title'] ) : '';
 		$a = '';
 
 		if ( ! $q ) {
@@ -112,7 +110,7 @@ function mai_render_accordion_block( $block_content, $parsed_block, $wp_block ) 
 			continue;
 		}
 
-		mai_get_accordion_schema_qa( [ $q, $a ] );
+		mai_get_accordion_faq_schema( [ $q, $a ] );
 	}
 
 	return $block_content;

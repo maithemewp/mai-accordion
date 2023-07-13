@@ -32,7 +32,7 @@ function mai_get_accordion_item( $args ) {
 }
 
 /**
- * Gets schema questions and answers.
+ * Gets FAQ schema.
  * Optionally add new schema to the static variable.
  *
  * @access private
@@ -43,11 +43,11 @@ function mai_get_accordion_item( $args ) {
  *
  * @return array
  */
-function mai_get_accordion_schema_qa( $qa = [] ) {
+function mai_get_accordion_faq_schema( $faq = [] ) {
 	static $cache = [];
 
-	if ( $qa ) {
-		$cache[] = $qa;
+	if ( $faq ) {
+		$cache[] = $faq;
 	}
 
 	return $cache;

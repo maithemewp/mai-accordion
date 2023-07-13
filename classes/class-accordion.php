@@ -94,10 +94,6 @@ class Mai_Accordion {
 			$this->args['content'] = mai_get_processed_content( $this->args['content'] );
 		}
 
-		if ( $this->args['schema'] ) {
-			$attributes['data-schema-type'] = 'faq';
-		}
-
 		return genesis_markup(
 			[
 				'open'    => '<div %s>',
