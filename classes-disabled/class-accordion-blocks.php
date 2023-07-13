@@ -167,6 +167,18 @@ class Mai_Accordion_Blocks {
 				'title'  => __( 'Mai Accordion', 'mai-engine' ),
 				'fields' => [
 					[
+						'key'           => 'mai_accordion_schema',
+						'label'         => __( 'Schema / Structured Data', 'mai-engine' ),
+						'name'          => 'schema',
+						'type'          => 'select',
+						'type'          => 'select',
+						'choices'       => [ 'faq' => __( 'FAQ', 'mai-engine' ) ],
+						'return_format' => 'value',
+						'multiple'      => 0,
+						'allow_null'    => 1,
+						// 'ui' => 1,
+					],
+					[
 						'key'           => 'mai_accordion_row_gap',
 						'label'         => __( 'Bottom Spacing', 'mai-engine' ),
 						'name'          => 'row_gap',

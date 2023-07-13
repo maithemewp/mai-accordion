@@ -197,7 +197,11 @@ final class Mai_Accordion_Plugin {
 			return;
 		}
 
-		new Mai_Accordion_Blocks;
+		// new Mai_Accordion_Blocks;
+
+		// Blocks.
+		include_once __DIR__ . '/blocks/accordion/block.php';
+		include_once __DIR__ . '/blocks/accordion-item/block.php';
 	}
 }
 
