@@ -7,7 +7,7 @@ add_action( 'wp_footer', 'mai_render_accordion_faq_schema' );
 /**
  * Renders schema from accordion block data.
  *
- * @since TBD
+ * @since 1.6.0
  *
  * @return void
  */
@@ -57,7 +57,7 @@ add_filter( 'render_block_acf/mai-accordion', 'mai_render_accordion_block_faq_sc
 /**
  * Adds schema from all Mai Accordion blocks.
  *
- * @since TBD
+ * @since 1.6.0
  *
  * @param string   $block_content The block content.
  * @param array    $block         The full block, including name and attributes.

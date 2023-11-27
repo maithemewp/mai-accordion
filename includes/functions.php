@@ -37,7 +37,7 @@ function mai_get_accordion_item( $args ) {
  *
  * @access private
  *
- * @since TBD
+ * @since 1.6.0
  *
  * @param array $faq Array with first item the question and second the answer.
  *

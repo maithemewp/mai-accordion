@@ -7,7 +7,7 @@ add_action( 'acf/init', 'mai_register_accordion_block' );
 /**
  * Register block.
  *
- * @since TBD
+ * @since 1.6.0
  *
  * @return void
  */
@@ -22,7 +22,7 @@ function mai_register_accordion_block() {
 /**
  * Callback function to render the block.
  *
- * @since TBD
+ * @since 1.6.0
  *
  * @param array    $attributes The block attributes.
  * @param string   $content The block content.
@@ -61,7 +61,7 @@ add_action( 'acf/init', 'mai_register_accordion_field_group' );
 /**
  * Register field group.
  *
- * @since TBD
+ * @since 1.6.0
  *
  * @return void
  */
