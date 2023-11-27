@@ -39,7 +39,7 @@ function mai_get_accordion_item( $args ) {
  *
  * @since TBD
  *
- * @param array $qa Array with first item the question and second the answer.
+ * @param array $faq Array with first item the question and second the answer.
  *
  * @return array
  */
