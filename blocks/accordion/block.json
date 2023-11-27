@@ -1,0 +1,21 @@
+{
+	"name": "acf/mai-accordion",
+	"title": "Mai Accordion",
+	"description": "A custom accordion toggle block.",
+	"category": "widgets",
+	"keywords": [ "accordion", "faq", "toggle" ],
+	"editorStyle": "file:./../../assets/mai-accordion.min.css",
+	"textdomain": "mai-accordion",
+	"providesContext": {
+		"acf/fields": "data"
+	},
+	"acf": {
+		"mode": "preview",
+		"renderCallback": "mai_do_accordion_block"
+	},
+	"supports": {
+		"align": false,
+		"anchor": true,
+		"mode": false
+	}
+}

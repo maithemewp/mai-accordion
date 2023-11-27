@@ -32,33 +32,23 @@ function mai_get_accordion_item( $args ) {
 }
 
 /**
- * Enqueues accordion styles.
+ * Gets FAQ schema.
+ * Optionally add new schema to the static variable.
  *
- * @since 1.4.0
+ * @access private
  *
- * @return void
+ * @since TBD
+ *
+ * @param array $faq Array with first item the question and second the answer.
+ *
+ * @return array
  */
-function mai_accordion_enqueue_styles() {
-	$suffix = mai_accordion_get_suffix();
-	wp_enqueue_style( 'mai-accordion', MAI_ACCORDION_PLUGIN_URL . sprintf( 'assets/mai-accordion%s.css', $suffix ), [], MAI_ACCORDION_VERSION . '.' . date( 'njYHi', filemtime( MAI_ACCORDION_PLUGIN_DIR . sprintf( 'assets/mai-accordion%s.css', $suffix ) ) ) );
-}
+function mai_get_accordion_faq_schema( $faq = [] ) {
+	static $cache = [];
 
-/**
- * Gets the script/style `.min` suffix for minified files.
- *
- * @since 0.1.0
- *
- * @return string
- */
-function mai_accordion_get_suffix() {
-	static $suffix = null;
-
-	if ( ! is_null( $suffix ) ) {
-		return $suffix;
+	if ( $faq ) {
+		$cache[] = $faq;
 	}
 
-	$debug  = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG;
-	$suffix = $debug ? '' : '.min';
-
-	return $suffix;
+	return $cache;
 }

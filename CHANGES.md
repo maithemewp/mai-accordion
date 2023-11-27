@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.6.0 (TBD)
+* Added: New FAQ schema option for better SEO via structured data.
+* Changed: Better handling of inline css.
+* Changed: Converts block registration to metadata via block.json.
+
 ## 1.5.0 (6/20/23)
 * Changed: Update updater.
 

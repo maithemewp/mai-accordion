@@ -33,6 +33,7 @@ class Mai_Accordion {
 			'content' => '', // Required.
 			'id'      => '',
 			'class'   => '',
+			'schema'  => '',
 			'row_gap' => 'md',
 		];
 	}
@@ -49,7 +50,9 @@ class Mai_Accordion {
 		$args['content'] = $args['content'];
 		$args['id']      = sanitize_html_class( $args['id'] );
 		$args['class']   = esc_html( $args['class'] );
+		$args['schema']  = sanitize_key( $args['schema'] );
 		$args['row_gap'] = esc_html( $args['row_gap'] );
+
 		return $args;
 	}
 
@@ -65,7 +68,12 @@ class Mai_Accordion {
 			return;
 		}
 
-		mai_accordion_enqueue_styles();
+		// Add inline CSS.
+		$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
+		$url    = MAI_ACCORDION_PLUGIN_URL . "assets/mai-accordion{$suffix}.css";
+		$path   = MAI_ACCORDION_PLUGIN_DIR . "assets/mai-accordion{$suffix}.css";
+		wp_enqueue_style( 'mai-accordion', $url );
+		wp_style_add_data( 'mai-accordion', 'path', $path );
 
 		$attributes = [
 			'class' => 'mai-accordion',
