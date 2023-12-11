@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.6.1 (12/11/23)
+* Fixed: Custom id and classes were not correctly added to the accordion markup.
+
 ## 1.6.0 (11/27/23)
 * Added: New FAQ schema option for better SEO via structured data.
 * Changed: Better handling of inline css.

@@ -43,8 +43,8 @@ function mai_do_accordion_item_block( $attributes, $content, $is_preview, $post_
 		'open'    => get_field( 'open' ),
 	];
 
-	if ( isset( $block['className'] ) && ! empty( $block['className'] ) ) {
-		$args['class'] = $block['className'];
+	if ( isset( $attributes['className'] ) && ! empty( $attributes['className'] ) ) {
+		$args['class'] = $attributes['className'];
 	}
 
 	$accordion = new Mai_Accordion_Item( $args, true );
