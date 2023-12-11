@@ -44,12 +44,12 @@ function mai_do_accordion_block( $attributes, $content, $is_preview, $post_id, $
 		'row_gap' => get_field( 'row_gap' ),
 	];
 
-	if ( isset( $block['anchor'] ) && ! empty( $block['anchor'] ) ) {
-		$args['id'] = $block['anchor'];
+	if ( isset( $attributes['anchor'] ) && ! empty( $attributes['anchor'] ) ) {
+		$args['id'] = $attributes['anchor'];
 	}
 
-	if ( isset( $block['className'] ) && ! empty( $block['className'] ) ) {
-		$args['class'] = $block['className'];
+	if ( isset( $attributes['className'] ) && ! empty( $attributes['className'] ) ) {
+		$args['class'] = $attributes['className'];
 	}
 
 	$accordion = new Mai_Accordion( $args, true );
