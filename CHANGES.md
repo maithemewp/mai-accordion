@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.6.2 (4/11/24)
+* Changed: Updated the updater.
+* Fixed: Converted to base64 encoded svg in CSS so parsing the DOM doesn't cause issues.
+
 ## 1.6.1 (12/11/23)
 * Fixed: Custom id and classes were not correctly added to the accordion markup.
 
