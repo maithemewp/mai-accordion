@@ -1,13 +1,16 @@
 .mai-accordion {
-	--icon-plus: url( 'data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M376 232H216V72c0-4.42-3.58-8-8-8h-32c-4.42 0-8 3.58-8 8v160H8c-4.42 0-8 3.58-8 8v32c0 4.42 3.58 8 8 8h160v160c0 4.42 3.58 8 8 8h32c4.42 0 8-3.58 8-8V280h160c4.42 0 8-3.58 8-8v-32c0-4.42-3.58-8-8-8z"/></svg>' );
-	--icon-minus: url( 'data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M376 232H8c-4.42 0-8 3.58-8 8v32c0 4.42 3.58 8 8 8h368c4.42 0 8-3.58 8-8v-32c0-4.42-3.58-8-8-8z"/></svg>' );
+	--icon-plus: url( 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzODQgNTEyIj48cGF0aCBkPSJNMzc2IDIzMkgyMTZWNzJjMC00LjQyLTMuNTgtOC04LThoLTMyYy00LjQyIDAtOCAzLjU4LTggOHYxNjBIOGMtNC40MiAwLTggMy41OC04IDh2MzJjMCA0LjQyIDMuNTggOCA4IDhoMTYwdjE2MGMwIDQuNDIgMy41OCA4IDggOGgzMmM0LjQyIDAgOC0zLjU4IDgtOFYyODBoMTYwYzQuNDIgMCA4LTMuNTggOC04di0zMmMwLTQuNDItMy41OC04LTgtOHoiLz48L3N2Zz4=' );
+	--icon-minus: url( 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzODQgNTEyIj48cGF0aCBkPSJNMzc2IDIzMkg4Yy00LjQyIDAtOCAzLjU4LTggOHYzMmMwIDQuNDIgMy41OCA4IDggOGgzNjhjNC40MiAwIDgtMy41OCA4LTh2LTMyYzAtNC40Mi0zLjU4LTgtOC04eiIvPjwvc3ZnPg==' );
 	margin-bottom: var(--accordion-margin-bottom, var(--spacing-md));
 }
 
 .mai-accordion-item {
+	--heading-color: var(--color-heading);
+	--link-color: var(--color-link); /* forces link color for dark-background */
 	margin: 0 0 var(--row-gap);
 	padding: 0;
 	background: var(--accordion-item-background, var(--color-white));
+	color: var(--accordion-item-color, var(--color-body));
 	border: var(--accordion-item-border, var(--border));
 	box-shadow: var(--accordion-item-box-shadow, 0);
 }
@@ -105,4 +108,9 @@
 .mai-accordion-content {
 	padding: var(--accordion-content-padding, var(--spacing-md));
 	border-top: var(--accordion-item-border, var(--border));
+}
+
+.has-dark-background {
+	--accordion-item-background: var(--color-background);
+	--accordion-item-color: var(--color-body);
 }
