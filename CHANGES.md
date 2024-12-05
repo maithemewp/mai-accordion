@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.6.3 (12/5/24)
+* Changed: Updated the updater.
+
 ## 1.6.2 (4/11/24)
 * Changed: Updated the updater.
 * Fixed: Converted to base64 encoded svg in CSS so parsing the DOM doesn't cause issues.
