@@ -24,7 +24,7 @@ function mai_render_accordion_faq_schema() {
 		$q = isset( $qa[0] ) && ! empty( $qa[0] ) ? $qa[0] : '';
 		$a = isset( $qa[1] ) && ! empty( $qa[1] ) ? $qa[1] : '';
 
-		if ( ! ( $q & $a ) ) {
+		if ( '' === $q || '' === $a ) {
 			continue;
 		}
 
@@ -45,9 +45,7 @@ function mai_render_accordion_faq_schema() {
 	$schema = [
 		'@context'   => 'https://schema.org',
 		'@type'      => 'FAQPage',
-		'mainEntity' => [
-			$entity,
-		],
+		'mainEntity' => $entity,
 	];
 
 	printf( '<script type="application/ld+json">%s</script>', wp_json_encode( $schema ) );
@@ -102,7 +100,7 @@ function mai_render_accordion_block_faq_schema( $block_content, $parsed_block, $
 			continue;
 		}
 
-		mai_get_accordion_faq_schema( [ $q, wpautop( $a ) ] );
+		mai_get_accordion_faq_schema( [ $q, $a ] );
 	}
 
 	return $block_content;
