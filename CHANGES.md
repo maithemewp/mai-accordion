@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.6.4 (TBD)
+## 1.6.4 (5/12/26)
 * Fixed: FAQ schema output was invalid — `mainEntity` was wrapped in an extra array.
 * Changed: Updated the updater.
 
