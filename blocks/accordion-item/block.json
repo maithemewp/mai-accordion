@@ -1,5 +1,4 @@
 {
-	"apiVersion": 3,
 	"name": "acf/mai-accordion-item",
 	"title": "Mai Accordion Item",
 	"description": "A custom accordion item toggle block.",
@@ -10,7 +9,7 @@
 	"textdomain": "mai-accordion",
 	"editorScript": "mai-accordion",
 	"acf": {
-		"mode": "preview",
+		"blockVersion": 3,
 		"renderCallback": "mai_do_accordion_item_block"
 	},
 	"supports": {
