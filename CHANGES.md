@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.6.5 (5/27/26)
+* Changed: Updated blocks to Block API v3 for WP 6.9 compatibility.
+
 ## 1.6.4 (5/12/26)
 * Fixed: FAQ schema output was invalid — `mainEntity` was wrapped in an extra array.
 * Changed: Updated the updater.

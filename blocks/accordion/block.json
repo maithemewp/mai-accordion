@@ -10,7 +10,7 @@
 		"acf/fields": "data"
 	},
 	"acf": {
-		"mode": "preview",
+		"blockVersion": 3,
 		"renderCallback": "mai_do_accordion_block"
 	},
 	"supports": {

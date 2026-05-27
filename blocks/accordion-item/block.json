@@ -9,7 +9,7 @@
 	"textdomain": "mai-accordion",
 	"editorScript": "mai-accordion",
 	"acf": {
-		"mode": "preview",
+		"blockVersion": 3,
 		"renderCallback": "mai_do_accordion_item_block"
 	},
 	"supports": {
