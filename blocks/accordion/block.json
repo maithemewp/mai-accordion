@@ -1,4 +1,5 @@
 {
+	"apiVersion": 3,
 	"name": "acf/mai-accordion",
 	"title": "Mai Accordion",
 	"description": "A custom accordion toggle block.",
