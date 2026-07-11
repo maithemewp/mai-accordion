@@ -1,12 +1,12 @@
 {
     "repositories": [
-        { "type": "vcs", "url": "https://github.com/maithemewp/deployable-guard" }
+        { "type": "vcs", "url": "https://github.com/bizbudding/deployable-guard" }
     ],
     "require": {
         "yahnis-elsts/plugin-update-checker": "^5"
     },
     "require-dev": {
-        "maithemewp/deployable-guard": "^1"
+        "bizbudding/deployable-guard": "^1"
     },
     "scripts": {
         "install-git-hooks": [
