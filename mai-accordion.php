@@ -5,6 +5,7 @@
  * Plugin URI:      https://bizbudding.com/mai-design-pack/
  * Description:     Add JS-free accordion toggles for displaying expandable FAQs, transcripts, resources, research, etc.
  * Version:         1.6.6
+ * Requires PHP:    8.1
  *
  * Author:          BizBudding
  * Author URI:      https://bizbudding.com
